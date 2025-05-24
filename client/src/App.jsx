@@ -1,10 +1,6 @@
 import { Route, Routes } from "react-router-dom"
 import { Footer } from "./components/Footer/Footer"
-import { Home } from "./pages/Home/Home"
-import { Favourite } from "./pages/Favourite/Favourite"
 import { Reminders } from "./pages/Reminders/Reminders"
-import { Account } from "./pages/Account/account"
-import { ReminderCard } from "./components/ReminderCard/ReminderCard"
 import { AddReminder } from "./pages/AddReminder/AddReminder"
 import { EditReminder } from "./pages/EditReminder/EditReminder"
 
