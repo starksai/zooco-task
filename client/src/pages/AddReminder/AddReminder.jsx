@@ -58,11 +58,9 @@ export const AddReminder = () => {
                 status: "Pending"
             };
 
-            console.log(payload);
-
 
             try {
-                const response = await axios.post("http://localhost:3001/api/reminders", payload);
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}/reminders`, payload);
                 if (response.status === 201 || response.status === 200) {
                     Swal.fire({
                         title: "Reminder saved successfully!",
