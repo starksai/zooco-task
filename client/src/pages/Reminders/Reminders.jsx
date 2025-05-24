@@ -7,7 +7,7 @@ import Calendar from '../../components/Calendar/Calendar';
 export const Reminders = () => {
   const [reminders, setReminders] = useState([]);
   const [completed, setCompleted] = useState([]);
-  const [loading, setLoading] = useState(true); // Optional loading state
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
     const fetchReminders = async () => {
@@ -45,22 +45,34 @@ export const Reminders = () => {
 
   const hasPendingReminders = ['Morning', 'Afternoon', 'Evening'].some(slot => groupBySlot(slot).length > 0);
 
+  const handleDeleteReminder = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/reminders/${id}`);
+
+      // Remove from reminders and completed lists
+      setReminders(prev => prev.filter(r => r._id !== id));
+      setCompleted(prev => prev.filter(r => r._id !== id));
+    } catch (error) {
+      console.error("Failed to delete reminder", error);
+      alert("Error deleting reminder.");
+    }
+  };
+
   return (
     <div className='p-3'>
       <Calendar />
 
       <div className="pb-24 space-y-6">
-        {/* 🔁 Loading message */}
+
         {loading && (
           <p className="text-center text-gray-500">Loading reminders...</p>
         )}
 
-        {/* 🚫 No Reminders Message */}
         {!loading && reminders.length === 0 && (
           <p className="text-center text-gray-500">No reminders found. Add your first one!</p>
         )}
 
-        {/* ✅ Reminders Section */}
+
         {!loading && reminders.length > 0 && (
           <>
             {['Morning', 'Afternoon', 'Evening'].map(slot => (
@@ -72,6 +84,7 @@ export const Reminders = () => {
                       key={reminder._id}
                       data={reminder}
                       onComplete={() => handleMarkAsCompleted(reminder._id)}
+                      onDelete={handleDeleteReminder}
                     />
                   ))}
                   {groupBySlot(slot).length === 0 && (
@@ -81,7 +94,7 @@ export const Reminders = () => {
               </div>
             ))}
 
-            {/* ✅ Completed Section */}
+
             <div className="mt-6">
               <h3 className="text-gray-500 font-semibold">Completed Goals</h3>
               <div className="space-y-3 opacity-70">
@@ -91,6 +104,7 @@ export const Reminders = () => {
                       key={reminder._id}
                       data={reminder}
                       isCompleted
+                      onDelete={handleDeleteReminder}
                     />
                   ))
                 ) : (

@@ -58,4 +58,24 @@ const getReminders = async (req, res) => {
     }
 };
 
-module.exports = { postReminder, getReminders }
+const deleteReminders = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const data = await ReminderModel.findOneAndDelete({ _id: id });
+
+        if (!data) {
+            return res.status(404).json({ message: "Reminder not found" });
+        }
+
+        res.json({ message: "Reminder deleted successfully", data });
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to delete reminder",
+            error: error.message
+        });
+    }
+};
+
+
+module.exports = { postReminder, getReminders, deleteReminders }
