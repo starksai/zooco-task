@@ -17,7 +17,7 @@ function App() {
         <Route path="/" element={<Reminders />} />
         <Route path="/reminders" element={<Reminders />} />
         <Route path="/addReminder" element={<AddReminder />} />
-        <Route path="/editReminder" element={<EditReminder />} />
+        <Route path="/editReminder/:id" element={<EditReminder />} />
       </Routes>
       <Footer />
     </div>

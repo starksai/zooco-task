@@ -3,12 +3,15 @@ import { MdOutlinePets } from "react-icons/md";
 import { IoMdAlarm } from "react-icons/io";
 import { RxLoop } from "react-icons/rx";
 import { FaCheckCircle } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 export const ReminderCard = ({ data, onComplete, isCompleted, onDelete }) => {
+    const navigate = useNavigate();
     const { _id, title, petName, time, frequency } = data;
 
     const handleEdit = () => {
-        alert("Edit feature coming soon!");
+        navigate(`/editReminder/${_id}`);
+
     };
 
     const handleDelete = () => {
