@@ -15,8 +15,7 @@ const PORT = process.env.BACKEND_PORT
 
 
 app.use(cors({
-    origin: origin,
-    credentials: true
+    origin: origin
 }))
 app.use(express.json())
 
