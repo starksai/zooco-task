@@ -35,7 +35,6 @@ const postReminder = async (req, res) => {
             data: savedReminder
         });
     } catch (error) {
-        console.log("Error creating reminder:", error);
         res.status(500).json({
             message: "Failed to create reminder",
             error: error.message
@@ -43,4 +42,20 @@ const postReminder = async (req, res) => {
     }
 }
 
-module.exports = { postReminder }
+const getReminders = async (req, res) => {
+    try {
+        const data = await ReminderModel.find();
+
+        res.status(200).json({
+            message: "Reminders fetched successfully",
+            data: data
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to get reminders",
+            error: error.message
+        });
+    }
+};
+
+module.exports = { postReminder, getReminders }
