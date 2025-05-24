@@ -1,11 +1,15 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const dotenv = require('dotenv')
 
 const { connectDB } = require('./util/dbConnetion.js')
 const { ReminderRoute } = require('./Routes/Reminder.route.js')
 
-const PORT = 3001
+dotenv.config()
+
+const PORT = process.env.BACKEND_PORT
+
 
 app.use(cors())
 app.use(express.json())
@@ -18,8 +22,8 @@ app.get('/', (req, res) => {
 app.use("/api", ReminderRoute)
 
 app.listen(`${PORT}`, async () => {
-    console.log(`server is running in http://localhost:${PORT}`);
 
     await connectDB()
 
+    console.log(`server is running in http://localhost:${PORT}`);
 })
