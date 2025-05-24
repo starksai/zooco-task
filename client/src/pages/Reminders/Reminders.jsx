@@ -3,11 +3,12 @@ import axios from 'axios';
 import { ReminderCard } from '../../components/ReminderCard/ReminderCard';
 import { AddReminderButton } from '../../components/AddReminder/AddReminderButton';
 import Calendar from '../../components/Calendar/Calendar';
+import Swal from "sweetalert2";
 
 export const Reminders = () => {
   const [reminders, setReminders] = useState([]);
   const [completed, setCompleted] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchReminders = async () => {
@@ -54,7 +55,13 @@ export const Reminders = () => {
       setCompleted(prev => prev.filter(r => r._id !== id));
     } catch (error) {
       console.error("Failed to delete reminder", error);
-      alert("Error deleting reminder.");
+      Swal.fire({
+        icon: "error",
+        title: "Error deleting reminder.",
+        text: "Something went wrong!",
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+
     }
   };
 

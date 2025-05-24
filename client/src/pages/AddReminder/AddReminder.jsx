@@ -4,9 +4,11 @@ import { FaCalendarAlt, FaClock } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Swal from "sweetalert2";
+import { useNavigate } from 'react-router-dom';
 
 
 export const AddReminder = () => {
+    const navigate = useNavigate()
     const [formData, setFormData] = useState({
         pet: '',
         category: '',
@@ -67,6 +69,7 @@ export const AddReminder = () => {
                         icon: "success",
                         draggable: true
                     });
+
                     setFormData({
                         pet: '',
                         category: '',
@@ -76,6 +79,10 @@ export const AddReminder = () => {
                         time: '',
                         frequency: '',
                     });
+
+                    navigate('/')
+
+
                 } else {
                     Swal.fire({
                         icon: "error",
@@ -83,6 +90,8 @@ export const AddReminder = () => {
                         text: "Failed to save reminder.",
                         footer: '<a href="#">Why do I have this issue?</a>'
                     });
+
+
                 }
             } catch (error) {
                 console.error("Error:", error);
