@@ -14,9 +14,12 @@ const origin = process.env.FRONTEND_URL
 const PORT = process.env.BACKEND_PORT
 
 
+// app.use(cors({
+//     origin: origin
+// }))
 app.use(cors({
-    origin: origin
-}))
+    origin: 'https://zooco-task-tbdl.vercel.app'
+}));
 app.use(express.json())
 
 app.get('/', (req, res) => {
