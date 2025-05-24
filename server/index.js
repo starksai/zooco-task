@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const app = express()
 const dotenv = require('dotenv')
+const {ReminderModel} = require('./Model/reminder.model.js')
 
 const { connectDB } = require('./util/dbConnetion.js')
 const { ReminderRoute } = require('./Routes/Reminder.route.js')
@@ -19,8 +20,20 @@ app.use(cors({
 }))
 app.use(express.json())
 
+// app.get('/', (req, res) => {
+//     res.send("db data fetching.....")
+
+// })
+
 app.get('/', (req, res) => {
-    res.send("db data fetching.....")
+
+    let data = ReminderModel.find()
+
+    if(!data){
+        return res.json("not fetchingg")
+    }
+    res.json(data)
+    
 
 })
 
