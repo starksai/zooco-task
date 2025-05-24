@@ -8,10 +8,15 @@ const { ReminderRoute } = require('./Routes/Reminder.route.js')
 
 dotenv.config()
 
+
+const origin = process.env.FRONTEND_URL
 const PORT = process.env.BACKEND_PORT
 
 
-app.use(cors())
+app.use(cors({
+    origin: origin,
+    credentials: true
+}))
 app.use(express.json())
 
 app.get('/', (req, res) => {
