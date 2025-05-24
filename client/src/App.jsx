@@ -4,7 +4,7 @@ import { Home } from "./pages/Home/Home"
 import { Favourite } from "./pages/Favourite/Favourite"
 import { Reminders } from "./pages/Reminders/Reminders"
 import { Account } from "./pages/Account/account"
-import { ReminderCard } from "./components/Footer/ReminderCard/ReminderCard"
+import { ReminderCard } from "./components/ReminderCard/ReminderCard"
 import { AddReminder } from "./pages/AddReminder/AddReminder"
 
 
